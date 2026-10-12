@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <%- include('partials/head', { title: tag.tag + ' — ' + category.name }) %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main class="container container-wide tag-detail">
+    <% const codeLanguage = category.language || (category.hasPreview === false ? 'javascript' : 'markup'); %>
+    <% const codeFilename = category.language ? ('ejemplo.' + category.language) : (category.hasPreview === false ? 'ejemplo.js' : 'ejemplo.html'); %>
+
+    <a class="back-nav" href="/<%= category.slug %>">
+      <span class="pager-arrow">‹</span> <%= category.name %>
+    </a>
+
+    <h1 class="tag-title">
+      <code><%= tag.tag %></code>
+      <% if (tag.deprecated) { %><span class="badge badge-warn">Obsoleta</span><% } %>
+    </h1>
+
+    <p class="tag-description"><%= tag.description %></p>
+
+    <% if (tag.note) { %>
+      <div class="note"><%= tag.note %></div>
+    <% } %>
+
+    <% if (tag.attributes && tag.attributes.length) { %>
+      <section class="attributes">
+        <h2><%= category.attributesLabel || 'Atributos' %></h2>
+        <table class="attr-table">
+          <tr><th><%= category.attributesLabel || 'Atributos' %></th><th>Descripcion</th></tr>
+          <% tag.attributes.forEach(function(a) { %>
+            <tr><td><code><%= a.name %></code></td><td><%= a.description %></td></tr>
+          <% }); %>
+        </table>
+      </section>
+    <% } %>
+
+    <% if (category.hasPreview !== false) { %>
+      <section class="preview-block">
+        <h2>Vista previa</h2>
+        <iframe class="preview" sandbox="<%= scriptable ? 'allow-scripts' : '' %>" srcdoc="<%= previewReset + tag.code %>" title="Vista previa de <%= tag.tag %>"></iframe>
+      </section>
+    <% } %>
+
+    <section class="code-block">
+      <h2>Codigo</h2>
+      <div class="editor">
+        <div class="editor-bar">
+          <span class="editor-dots"><span></span><span></span><span></span></span>
+          <span class="editor-filename"><%= codeFilename %></span>
+          <button class="copy-btn" type="button" data-copy>Copiar</button>
+        </div>
+        <pre><code class="language-<%= codeLanguage %>"><%= tag.code %></code></pre>
+      </div>
+    </section>
+
+    <%- include('partials/pager', { category, prevTag, nextTag, position, total }) %>
+  </main>
+
+  <%- include('partials/footer') %>
+  <script src="/vendor/prism/components/prism-core.min.js"></script>
+  <script src="/vendor/prism/components/prism-markup.min.js"></script>
+  <script src="/vendor/prism/components/prism-clike.min.js"></script>
+  <script src="/vendor/prism/components/prism-javascript.min.js"></script>
+  <% if (codeLanguage === 'sql') { %>
+  <script src="/vendor/prism/components/prism-sql.min.js"></script>
+  <% } %>
+  <% if (codeLanguage === 'mongodb') { %>
+  <script src="/vendor/prism/components/prism-mongodb.min.js"></script>
+  <% } %>
+  <% if (codeLanguage === 'json') { %>
+  <script src="/vendor/prism/components/prism-json.min.js"></script>
+  <% } %>
+  <script src="/scripts/copy.js"></script>
+</body>
+</html>

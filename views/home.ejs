@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <%- include('partials/head', { title: 'Guia de Desarrollo Basico' }) %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main class="container container-wide home">
+    <section class="hero">
+      <h1>Guia de Desarrollo Basico</h1>
+      <p>Guia visual para aprender desarrollo web, backend y bases de datos: HTML, CSS, JavaScript, jQuery, Node.js, Express, SQL, MongoDB, JSON y mas. Cada elemento incluye ejemplo en vivo, codigo fuente y descripcion.</p>
+    </section>
+
+    <section class="category-grid">
+      <% categories.forEach(function(c) { %>
+        <% if (c.ready) { %>
+          <a class="category-card" href="/<%= c.slug %>">
+        <% } else { %>
+          <div class="category-card disabled">
+        <% } %>
+            <h2><%= c.name %></h2>
+            <p class="tagline"><%= c.tagline %></p>
+            <p class="description"><%= c.description %></p>
+            <span class="status"><%= c.ready ? 'Explorar' : 'Proximamente' %></span>
+        <% if (c.ready) { %>
+          </a>
+        <% } else { %>
+          </div>
+        <% } %>
+      <% }); %>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

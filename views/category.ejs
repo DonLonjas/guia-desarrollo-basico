@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <%- include('partials/head', { title: category.name + ' — Guia de Desarrollo Basico' }) %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main class="container container-wide">
+    <a class="back-nav" href="/">
+      <span class="pager-arrow">‹</span> Inicio
+    </a>
+
+    <section class="category-intro">
+      <h1><%= category.name %></h1>
+      <p><%= category.description %></p>
+      <input
+        type="search"
+        id="tag-search"
+        class="tag-search"
+        placeholder="Buscar etiqueta, por ejemplo: img, table, form..."
+        autocomplete="off"
+      >
+    </section>
+
+    <% groups.forEach(function(group) { %>
+      <section class="tag-group">
+        <h2 class="group-title"><%= group.name %></h2>
+        <div class="tag-grid">
+          <% group.tags.forEach(function(t) { %>
+            <a class="tag-card" href="/<%= category.slug %>/<%= t.slug %>" data-search="<%= t.slug %> <%= t.name.toLowerCase() %> <%= t.tag.toLowerCase() %>">
+              <code class="tag-label"><%= t.tag %></code>
+              <p class="tag-desc"><%= t.description.slice(0, 90) %><%= t.description.length > 90 ? '…' : '' %></p>
+            </a>
+          <% }); %>
+        </div>
+      </section>
+    <% }); %>
+
+    <p id="no-results" class="no-results" hidden>Ninguna etiqueta coincide con la busqueda.</p>
+  </main>
+
+  <%- include('partials/footer') %>
+  <script src="/scripts/tag-search.js"></script>
+</body>
+</html>

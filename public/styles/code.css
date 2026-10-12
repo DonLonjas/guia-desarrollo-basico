@@ -1,0 +1,89 @@
+/*
+  El bloque de codigo como listado impreso: papel, tinta, sin colores de
+  sintaxis. La jerarquia la marca el peso (negrita para etiquetas, cursiva
+  para valores, opacidad para comentarios) igual que el resto del sitio.
+  El verde queda reservado unicamente para la confirmacion de "Copiado".
+*/
+
+.editor {
+  background: var(--alto);
+  border: 1px solid var(--linea);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.editor-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--burbuja);
+  border-bottom: 1px solid var(--linea);
+}
+
+.editor-dots { display: flex; gap: 6px; }
+.editor-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--suave);
+  background: transparent;
+}
+
+.editor-filename {
+  color: var(--suave);
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+}
+
+.copy-btn {
+  margin-left: auto;
+  background: transparent;
+  color: var(--tinta);
+  border: 1px solid var(--tinta);
+  border-radius: var(--radius);
+  padding: 3px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+.copy-btn:hover { background: var(--tinta); color: var(--papel); }
+.copy-btn.copied { background: var(--exito); border-color: var(--exito); color: var(--exito-ink); }
+
+.editor pre {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  background: transparent;
+}
+
+.editor code,
+.editor pre {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+/* Tokens Prism (language-markup): solo peso y estilo, sin color */
+.token.tag,
+.token.tag .punctuation { color: var(--tinta); font-weight: 700; }
+.token.attr-name { color: var(--tinta); font-weight: 500; }
+.token.attr-value,
+.token.attr-value .punctuation,
+.token.string { color: var(--suave); font-style: italic; }
+.token.comment { color: var(--suave); font-style: italic; opacity: 0.8; }
+.token.punctuation { color: var(--suave); }
+.token.doctype { color: var(--suave); }
+.token.entity { color: var(--tinta); font-weight: 700; }
+
+/* Tokens Prism (language-javascript): mismo criterio, solo peso y estilo */
+.token.keyword { font-weight: 700; }
+.token.function { color: var(--tinta); font-weight: 700; }
+.token.template-string { color: var(--suave); font-style: italic; }
+.token.number,
+.token.boolean { font-weight: 700; }
+.token.class-name { font-weight: 700; }
+.token.operator { color: var(--suave); }
+
+.editor code { color: var(--tinta); }

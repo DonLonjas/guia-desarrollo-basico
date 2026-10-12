@@ -1,0 +1,15 @@
+<header class="site-header">
+  <a class="brand" href="/">
+    <img src="/logo.png" alt="" width="36" height="36" class="brand-logo" loading="eager" decoding="async">
+    <span>Guia de Desarrollo Basico</span>
+  </a>
+  <nav class="main-nav">
+    <% categories.forEach(function(c) { %>
+      <a
+        href="/<%= c.slug %>"
+        class="nav-link <%= (typeof category !== 'undefined' && category.slug === c.slug) ? 'active' : '' %> <%= !c.ready ? 'disabled' : '' %>"
+        <% if (!c.ready) { %>tabindex="-1" aria-disabled="true"<% } %>
+      ><%= c.name %></a>
+    <% }); %>
+  </nav>
+</header>

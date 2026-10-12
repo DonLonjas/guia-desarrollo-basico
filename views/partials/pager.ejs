@@ -1,0 +1,21 @@
+<nav class="tag-pager" aria-label="Navegacion entre etiquetas">
+  <% if (prevTag) { %>
+    <a class="pager-link pager-prev" href="/<%= category.slug %>/<%= prevTag.slug %>">
+      <span class="pager-arrow">‹</span>
+      <span class="pager-text"><%= prevTag.tag %></span>
+    </a>
+  <% } else { %>
+    <span class="pager-link pager-disabled"><span class="pager-arrow">‹</span> Anterior</span>
+  <% } %>
+
+  <span class="pager-position"><%= position %> / <%= total %></span>
+
+  <% if (nextTag) { %>
+    <a class="pager-link pager-next" href="/<%= category.slug %>/<%= nextTag.slug %>">
+      <span class="pager-text"><%= nextTag.tag %></span>
+      <span class="pager-arrow">›</span>
+    </a>
+  <% } else { %>
+    <span class="pager-link pager-disabled">Siguiente <span class="pager-arrow">›</span></span>
+  <% } %>
+</nav>
